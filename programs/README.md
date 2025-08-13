@@ -41,12 +41,12 @@ print(response.json())
 
 **Install dependencies:**
 ```bash
-pip install requests fastapi uvicorn
+poetry add requests fastapi uvicorn
 ```
 
 **Start server:**
 ```bash
-uvicorn program_festapi:servidor --reload --host 0.0.0.0 --port 8000
+uvicorn program_festapi:servidor
 ```
 
 **Test client:**
