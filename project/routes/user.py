@@ -13,7 +13,7 @@ async def get_user(user_id: int):
 
 @app.post("/users")
 async def create_user(user: User):
-    user.
+    #user
     print("post")
     return
 
