@@ -53,11 +53,69 @@ class PostgreeSQLConnection:
             print(f"Error inserting user: {e}")
             return None
 
-    def update_user():
-        pass
+    def update_user(self, id, name=None, empresa=None, cargo=None, anos_experiencia=None, salario=None, is_ativo=None, qualidade_servico=None ):
+        if not self.conn:
+            print("Not connected to the database")
+            return None
+        try:
+            cursor = self.conn.cursor()
+            update_query = "UPDATE users SET"
+            update_values = []
 
-    def delete_user():
-        pass
+            if name is not None:
+                update_query += " nome = %s,"
+                update_values.append(name)
+
+            if empresa is not None:
+                update_query += " empresa = %s,"
+                update_values.append(empresa)
+
+            if cargo is not None:
+                update_query += " cargo = %s,"
+                update_values.append(cargo)
+
+            if anos_experiencia is not None:
+                update_query += " anos_experiencia = %s,"
+                update_values.append(anos_experiencia)
+
+            if salario is not None:
+                update_query += " salario = %s,"
+                update_values.append(salario)
+
+            if is_ativo is not None:
+                update_query += " is_ativo = %s,"
+                update_values.append(is_ativo)
+
+            if qualidade_servico is not None:
+                update_query += " qualidade_servico = %s,"
+                update_values.append(qualidade_servico)
+
+            update_query = update_query.rstrip(",") + " WHERE id = %s"
+            update_values.append(id)
+
+            cursor.execute(update_query, update_values)
+            self.conn.commit()
+            cursor.close()
+            print("User updated successfully")
+        except psycopg2.Error as e:
+            print(f"Error updating user: {e}")
+            return None
+            
+    def delete_user(self, user_id: int):
+        if not self.conn:
+            print("Not connected to the database")
+            return None
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                "DELETE FROM users WHERE id = %s",
+                (user_id,)
+            )
+            self.conn.commit()
+            cursor.close()
+            print("User deleted successfully")
+        except psycopg2.Error as e:
+            print(f"Error deleting user: {e}")
 
     def close(self):
         if self.conn:
