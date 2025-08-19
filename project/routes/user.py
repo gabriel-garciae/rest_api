@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from project.models.user import User
-from project.controller.user import c_get_user
+from project.controller.user import c_get_user, c_create_user
 
 app = FastAPI()
 
@@ -13,9 +13,11 @@ async def get_user(user_id: int):
 
 @app.post("/users")
 async def create_user(user: User):
-    #user
-    print("post")
-    return
+    db_user = await c_get_user(user.id)
+    if db_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+    user = await c_create_user(user)
+    return user
 
 @app.put("/users/{user_id}")
 async def update_user(user_id: int, user: User):

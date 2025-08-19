@@ -36,8 +36,22 @@ class PostgreeSQLConnection:
             print(f"Error selecting user: {e}")
             return None
 
-    def insert_user():
-        pass
+    def insert_user(self, id, nome, empresa, cargo, anos_experiencia, salario, is_ativo, qualidade_servico):
+        if not self.conn:
+            print("Not connected to the database")
+            return None
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                "INSERT INTO users (id, nome, empresa, cargo, anos_experiencia, salario, is_ativo, qualidade_servico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                (id, nome, empresa, cargo, anos_experiencia, salario, is_ativo, qualidade_servico)
+            )
+            self.conn.commit()
+            cursor.close()
+            print("User inserted successfully")
+        except psycopg2.Error as e:
+            print(f"Error inserting user: {e}")
+            return None
 
     def update_user():
         pass

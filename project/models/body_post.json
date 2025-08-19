@@ -1,0 +1,10 @@
+{
+    "id":2,
+    "nome":"Gabriel",
+    "empresa":"one",
+    "cargo":"Software Eng",
+    "anos_experiencia":7,
+    "salario":22345.67,
+    "is_ativo":true,
+    "qualidade_servico":"good"
+}

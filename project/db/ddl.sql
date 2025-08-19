@@ -1,7 +1,7 @@
 -- create table users
 
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     empresa VARCHAR(100),
     cargo VARCHAR(100), 
@@ -13,6 +13,6 @@ CREATE TABLE users (
 
 
 INSERT INTO users
-    (user_id, nome, empresa, cargo, anos_experiencia, salario, is_ativo, qualidade_servico)
+    (id, nome, empresa, cargo, anos_experiencia, salario, is_ativo, qualidade_servico)
 VALUES
     (1, 'Fabio', 'Tech', 'Software Eng', 3, 12345.67, true, 'good');
